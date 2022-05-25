@@ -81,3 +81,37 @@ _.go(
     L.map((m) => m.get("name")),
     _.each(console.log)
 )
+
+
+// 3. product, products
+
+class Product extends Model {}
+
+class Products extends Collection {
+    totalPrice() {
+        // return _.go(
+        //     this,
+        //     L.map(p => p.get('price')),
+        //     _.reduce((a, b) => a + b)
+        // );
+
+        // 위와 동일
+        return _.reduce((a, b) => a+b, L.map(p => p.get('price'), this));
+
+        // let totalPrice = 0;
+        // this._models.forEach(product => {
+        //     totalPrice += product.get('price');
+        // })
+        // return totalPrice;
+    }
+}
+
+const products = new Products();
+products.add(new Product({id:1, price: 10000}));
+console.log('total price: ', products.totalPrice());
+products.add(new Product({id:2, price: 20000}));
+console.log('total price: ', products.totalPrice());
+products.add(new Product({id:3, price: 30000}));
+console.log('total price: ', products.totalPrice());
+
+
