@@ -90,3 +90,18 @@ const mapObject = (f, obj) => _.go(
 )
 
 console.log(mapObject(x=>x+10, {a:1, b:2, c:3}));
+
+
+// 7. pick
+const obj2 = {a:1, b:2, c:3, d:4, e:5};
+const pick = (ks, obj) => _.go(
+    ks,
+    L.map(k => [k, obj[k]]),
+    L.reject(([k, v]) => v === undefined),
+    object
+)
+const pick2 = (ks, obj) => object(_.map(k => [k, obj[k]], ks));
+
+console.log(pick(['b', 'c'], obj2));
+// {b:2, c:3}
+console.log(pick2(['b', 'c'], obj2));
