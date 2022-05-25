@@ -76,3 +76,17 @@ _.go(
     _.reduce((a,b) => a+b),
     console.log
 );
+
+// 5. object
+const object = entries => _.reduce((obj, [k, v]) => (obj[k] = v, obj), {}, entries);
+
+// 6. mapObject
+
+const mapObject = (f, obj) => _.go(
+    obj,
+    L.entries,
+    _.map(([k, v]) => [k, f(v)]), 
+    object
+)
+
+console.log(mapObject(x=>x+10, {a:1, b:2, c:3}));
