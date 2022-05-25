@@ -112,10 +112,21 @@ console.log(pick2(['b', 'c'], obj2));
 // 매핑하는 함수
 // 각 객체에 인덱싱을 해줘서 매핑
 const users = [
-    {id:1, name: 'hello'},
-    {id:2, name: 'good'}
+    {id:1, name: 'hello', age: 10},
+    {id:2, name: 'good', age: 30}
 ]
 
 _.indexBy = (f, iter) => _.reduce((obj, a) => (obj[f(a)] = a, obj) , {}, iter)
-console.log(_.indexBy(u => u.id, users) )
+const users2 = _.indexBy(u => u.id, users)
+console.log(users2)
 
+// 9. indexBy 된 값을 filter 하기
+const users3 = _.go(
+    users2,
+    L.entries,
+    L.filter(([_, {age}]) => age > 20),
+    L.take(1),
+    object
+)
+
+console.log('user3: ', users3[2]);
