@@ -105,3 +105,17 @@ const pick2 = (ks, obj) => object(_.map(k => [k, obj[k]], ks));
 console.log(pick(['b', 'c'], obj2));
 // {b:2, c:3}
 console.log(pick2(['b', 'c'], obj2));
+
+
+// 8. indexBy
+// 배열속의 여래개의 객체들이 있는 데이터 형태를
+// 매핑하는 함수
+// 각 객체에 인덱싱을 해줘서 매핑
+const users = [
+    {id:1, name: 'hello'},
+    {id:2, name: 'good'}
+]
+
+_.indexBy = (f, iter) => _.reduce((obj, a) => (obj[f(a)] = a, obj) , {}, iter)
+console.log(_.indexBy(u => u.id, users) )
+
